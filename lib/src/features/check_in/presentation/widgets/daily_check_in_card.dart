@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:attune/src/core/state/user_session.dart';
+import 'package:attune/src/core/theme/app_colors.dart';
 
 class DailyCheckInCard extends StatefulWidget {
   const DailyCheckInCard({super.key});
@@ -25,21 +26,7 @@ class _DailyCheckInCardState extends State<DailyCheckInCard> {
 
   Color _getCardColor(BuildContext context) {
     if (_selectedTone.isEmpty) return Theme.of(context).primaryColor;
-
-    switch (_selectedTone) {
-      case 'Focused':
-        return const Color(0xFF5C6BC0); // Indigo
-      case 'Calm':
-        return const Color(0xFF26A69A); // Teal
-      case 'Productive':
-        return const Color(0xFFEF5350); // Red
-      case 'Creative':
-        return const Color(0xFFAB47BC); // Purple
-      case 'Relaxed':
-        return const Color(0xFF78909C); // Blue Grey
-      default:
-        return Theme.of(context).primaryColor;
-    }
+    return AppColors.getColorForTone(_selectedTone);
   }
 
   @override
@@ -94,6 +81,32 @@ class _DailyCheckInCardState extends State<DailyCheckInCard> {
                   color: Colors.white.withOpacity(0.9),
                   fontSize: 14,
                 ),
+              ),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  Icon(Icons.bolt, color: Colors.white70, size: 16),
+                  const SizedBox(width: 4),
+                  Text(
+                    '${_energyLevel.toInt()}%',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Icon(Icons.spa, color: Colors.white70, size: 16),
+                  const SizedBox(width: 4),
+                  Text(
+                    '${_stressLevel.toInt()}%',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

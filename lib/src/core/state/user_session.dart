@@ -1,4 +1,6 @@
 import 'package:flutter/foundation.dart';
+import 'package:attune/src/core/theme/app_colors.dart';
+import 'package:flutter/widgets.dart';
 
 class UserSession extends ChangeNotifier {
   static final UserSession instance = UserSession._internal();
@@ -25,6 +27,9 @@ class UserSession extends ChangeNotifier {
   double get defaultWorkDuration => _defaultWorkDuration;
   double get defaultBreakDuration => _defaultBreakDuration;
 
+  // Dynamic Theme Color (From AppColors)
+  Color get currentThemeColor => AppColors.getColorForTone(_currentTone);
+
   // Setters
   void updateCheckIn({
     required double energy,
@@ -43,6 +48,18 @@ class UserSession extends ChangeNotifier {
   void updateFocusSettings({double? workDuration, double? breakDuration}) {
     if (workDuration != null) _defaultWorkDuration = workDuration;
     if (breakDuration != null) _defaultBreakDuration = breakDuration;
+    print(
+      'UserSession Updated: Tone=$_currentTone, ThemeColor=$currentThemeColor',
+    );
+    notifyListeners();
+  }
+
+  // Time Format Settings
+  bool _is24HourFormat = false;
+  bool get is24HourFormat => _is24HourFormat;
+
+  void toggleTimeFormat(bool value) {
+    _is24HourFormat = value;
     notifyListeners();
   }
 

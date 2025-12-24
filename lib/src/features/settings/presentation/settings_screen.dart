@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:attune/src/core/state/user_session.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -37,6 +38,45 @@ class SettingsScreen extends StatelessWidget {
               subtitle: 'Light',
               onTap: () => _showThemeDialog(context),
             ),
+            AnimatedBuilder(
+              animation: UserSession.instance,
+              builder: (context, child) {
+                return SwitchListTile.adaptive(
+                  value: UserSession.instance.is24HourFormat,
+                  onChanged: (value) =>
+                      UserSession.instance.toggleTimeFormat(value),
+                  title: const Text(
+                    '24-Hour Time',
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+                  ),
+                  secondary: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor.withOpacity(0.1),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      Icons.access_time,
+                      color: Theme.of(context).primaryColor,
+                      size: 20,
+                    ),
+                  ),
+                  activeColor: Theme.of(context).primaryColor,
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 4,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  tileColor: Colors.white,
+                );
+              },
+            ),
+            const SizedBox(
+              height: 12,
+            ), // Add spacing manually since not using _buildSettingsTile
+
             _buildSettingsTile(
               context,
               icon: Icons.notifications_none_outlined,

@@ -3,47 +3,35 @@ import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 
 class AppTheme {
-  static ThemeData get lightTheme {
+  static ThemeData getTheme(Color seedColor) {
     return ThemeData(
       useMaterial3: true,
-      colorScheme: ColorScheme(
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: seedColor,
         brightness: Brightness.light,
-        primary: AppColors.primary,
-        onPrimary: Colors.white,
-        secondary: AppColors.primaryLight,
-        onSecondary: AppColors.textPrimary,
-        error: AppColors.error,
-        onError: Colors.white,
         surface: AppColors.surface,
-        onSurface: AppColors.textPrimary,
       ),
-      scaffoldBackgroundColor: AppColors.background,
+      scaffoldBackgroundColor: ColorScheme.fromSeed(
+        seedColor: seedColor,
+      ).surfaceContainerLowest, // Very light tint
       textTheme: GoogleFonts.outfitTextTheme().apply(
         bodyColor: AppColors.textPrimary,
         displayColor: AppColors.textPrimary,
       ),
-      appBarTheme: const AppBarTheme(
-        backgroundColor: AppColors.background,
+      appBarTheme: AppBarTheme(
+        backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        iconTheme: IconThemeData(color: AppColors.textPrimary),
+        iconTheme: IconThemeData(color: seedColor), // Use dynamic color
         titleTextStyle: TextStyle(
-          color: AppColors.textPrimary,
+          color: seedColor, // Use dynamic color
           fontSize: 20,
           fontWeight: FontWeight.w600,
         ),
       ),
-      /* cardTheme: CardTheme(
-        color: AppColors.surface,
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-          side: const BorderSide(color: AppColors.secondary),
-        ),
-      ), */
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primary,
+          backgroundColor: seedColor,
           foregroundColor: Colors.white,
           elevation: 0,
           shape: RoundedRectangleBorder(
