@@ -3,10 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:attune/src/core/theme/app_colors.dart';
 
 class ScaffoldWithNavBar extends StatelessWidget {
-  const ScaffoldWithNavBar({
-    required this.navigationShell,
-    super.key,
-  });
+  const ScaffoldWithNavBar({required this.navigationShell, super.key});
 
   final StatefulNavigationShell navigationShell;
 
@@ -39,16 +36,22 @@ class ScaffoldWithNavBar extends StatelessWidget {
             label: 'Focus',
           ),
           NavigationDestination(
-            icon: Icon(Icons.person_outline),
-            selectedIcon: Icon(Icons.person),
-            label: 'Profile',
+            icon: Icon(Icons.bar_chart_outlined),
+            selectedIcon: Icon(Icons.bar_chart_rounded),
+            label: 'Timeline',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.settings_outlined),
+            selectedIcon: Icon(Icons.settings),
+            label: 'Settings',
           ),
         ],
-        backgroundColor: AppColors.surface,
-        indicatorColor: AppColors.primary.withAlpha(50),
-        elevation: 2,
-        height: 65,
-        labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+        backgroundColor: Colors.white,
+        indicatorColor: Theme.of(context).primaryColor.withOpacity(0.15),
+        elevation: 0,
+        height: 70,
+        surfaceTintColor: Colors.transparent,
+        labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
       ),
     );
   }
